@@ -85,7 +85,7 @@ jobs:
       run: echo 'vpc_id = ${{ steps.vpc_info.outputs.vpc_info }}' >> pipeline.auto.tfvars
 
     - name: debug
-      run: echo pipeline.auto.tfvars; ls -alh
+      run: cat pipeline.auto.tfvars; ls -alh
 
 
 

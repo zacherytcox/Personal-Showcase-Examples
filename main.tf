@@ -7,7 +7,7 @@ output "name" {
 }
 
 resource "aws_s3_bucket" "example" {
-  bucket = "my-tf-test-bucket"
+  bucket = "b3691909d8800f0e36eeff26aa6e4974"
 
   tags = {
     Name        = "My bucket"

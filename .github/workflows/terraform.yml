@@ -69,13 +69,9 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./${{ github.workflow }}
+        working-directory: ./terraform
 
     steps:
-
-    - name: Print workflow name using context
-      run: echo "Starting the ${{ github.workflow }} pipeline!"
-
       # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4

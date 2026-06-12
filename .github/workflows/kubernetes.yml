@@ -43,6 +43,7 @@ jobs:
       run: terraform fmt -check
 
 
+
     ## Gather information about existing resources
     - name: Get VPC Info
       run: vpc_info=$(aws ec2 describe-vpcs| jq -r '.'); echo $vpc_info
@@ -55,24 +56,25 @@ jobs:
       run: echo ${{ steps.vpc_info.outputs.vpc_info }}
 
     - name: tfvars input
-      run: echo 'vpc_id = ${{ steps.vpc_info.outputs.vpc_info }}' > stage.auto.tfvars
+      run: echo 'vpc_id = ${{ steps.vpc_info.outputs.vpc_info }}' > pipeline.auto.tfvars
 
 
+      
 
     # Initialize a new or existing Terraform working directory by creating initial files, loading any remote state, downloading modules, etc.
     - name: Terraform Init
-      run: terraform init
+      run: terraform init -var-file="pipeline.auto.tfvars"
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan
-      run: terraform plan -input=false
+      run: terraform plan -input=false -var-file="pipeline.auto.tfvars"
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks
     - name: Terraform Apply
       if: github.ref == 'refs/heads/main'
-      run: terraform apply -auto-approve -input=false
+      run: terraform apply -auto-approve -input=false -var-file="pipeline.auto.tfvars"
 
     - name: Terraform Destroy
       if: github.ref == 'refs/heads/main'
-      run: terraform destroy -auto-approve -input=false
+      run: terraform destroy -auto-approve -input=false -var-file="pipeline.auto.tfvars"

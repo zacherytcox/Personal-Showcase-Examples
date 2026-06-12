@@ -52,7 +52,7 @@ jobs:
 
     - name: Get VPC Info
       id: vpc_info
-      run: echo "vpc_info=$(aws ec2 describe-vpcs| jq -r '.[0].vpc_id')" >> "$GITHUB_OUTPUT"
+      run: echo "vpc_info=$(aws ec2 describe-vpcs| jq -r '.Vpcs.[0].VpcId')" >> "$GITHUB_OUTPUT"
 
     - name: debug
       run: echo ${{ steps.vpc_info.outputs.vpc_info }}

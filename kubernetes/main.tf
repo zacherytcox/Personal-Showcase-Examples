@@ -7,7 +7,7 @@ output "name" {
 }
 
 output "vpc_id" {
-  value = vars.vpc_id
+  value = var.vpc_id
 }
 
 

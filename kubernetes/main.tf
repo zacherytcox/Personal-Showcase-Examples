@@ -6,6 +6,12 @@ output "name" {
   value = "testt"
 }
 
+output "name" {
+  value = vars.vpc_id
+}
+
+
+
 # resource "aws_s3_bucket" "example" {
 #   bucket = "b3691909d8800f0e36eeff26aa6e497412"
 

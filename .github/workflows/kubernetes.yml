@@ -45,8 +45,7 @@ jobs:
     - name: Terraform Format
       run: terraform fmt -check
 
-    # Gathers information about existing resources
-
+    ## Gather information about existing resources
     - name: Get VPC Info
       run: vpc_info=$(aws ec2 describe-vpcs| jq -r '.'); echo $vpc_info
 
@@ -56,6 +55,11 @@ jobs:
 
     - name: debug
       run: echo ${{ steps.vpc_info.outputs.vpc_info }}
+
+    - name: tfvars input
+      run: echo 'vpc_id = ${{ steps.vpc_info.outputs.vpc_info }}' > pipeline.auto.tfvars
+
+
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan

@@ -48,7 +48,7 @@ jobs:
     # Gathers information about existing resources
     - name: Get VPC Info
       id: vpc_info
-      run: echo "vpc_info=$(aws ec2 describe-vpcs | jq -r '.')" >> "$GITHUB_OUTPUT"
+      run: echo "vpc_info=$(aws ec2 describe-vpcs)" >> "$GITHUB_OUTPUT"
 
     - name: debug
       run: echo ${{ steps.vpc_info.outputs.vpc_info }}

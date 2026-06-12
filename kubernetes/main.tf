@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 output "name" {
-  value = "testt"
+  value = "test"
 }
 
 # resource "aws_s3_bucket" "example" {

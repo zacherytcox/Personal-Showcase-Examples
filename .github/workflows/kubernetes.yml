@@ -1,11 +1,11 @@
 
-name: 'terraform'
+name: 'kubernetes'
 
 on:
   push:
     branches: [ "main" ]
     paths:
-      - 'terraform/**'
+      - 'kubernetes/**'
   pull_request:
 
 env:
@@ -44,6 +44,13 @@ jobs:
     # Checks that all Terraform configuration files adhere to a canonical format
     - name: Terraform Format
       run: terraform fmt -check
+
+    # Gathers information about existing resources
+    - name: Get VPC Info
+      run: temp=$(aws ec2 describe-vpcs | jq -r '.')
+
+    - name: debug
+      run: echo $temp
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan

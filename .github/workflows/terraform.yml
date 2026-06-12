@@ -47,6 +47,8 @@ name: 'Terraform Deploy'
 on:
   push:
     branches: [ "main" ]
+    paths:
+      - 'terraform/**'
   pull_request:
 
 env:
@@ -59,7 +61,7 @@ permissions:
 
 jobs:
   terraform:
-    name: 'Terraform'
+    name: 'Build Terraform'
     runs-on: ubuntu-latest
     environment: production
 
@@ -67,9 +69,14 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ./terraform
 
     steps:
-    # Checkout the repository to the GitHub Actions runner
+
+    - name: Print workflow name using context
+      run: echo "Starting the ${{ github.workflow }} pipeline!"
+
+      # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
 
@@ -88,12 +95,6 @@ jobs:
     # Generates an execution plan for Terraform
     - name: Terraform Plan
       run: terraform plan -input=false
-
-    - name: Print Info
-      run: echo $AWS_DEFAULT_REGION
-
-    - name: Print Info 2
-      run: aws ec2 describe-regions --output table
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
       # Note: It is recommended to set up a required "strict" status check in your repository for "Terraform Cloud". See the documentation on "strict" required status checks for more information: https://help.github.com/en/github/administering-a-repository/types-of-required-status-checks

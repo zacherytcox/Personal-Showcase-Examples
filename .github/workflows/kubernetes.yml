@@ -47,10 +47,11 @@ jobs:
 
     # Gathers information about existing resources
     - name: Get VPC Info
-      run: temp=$(aws ec2 describe-vpcs | jq -r '.'); echo $temp
+      id: vpc_info
+      run: echo "vpc_info=$(aws ec2 describe-vpcs | jq -r '.')" >> "$GITHUB_OUTPUT"
 
     - name: debug
-      run: echo $temp
+      run: echo ${{ steps.vpc_info.outputs.vpc_info }}
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan

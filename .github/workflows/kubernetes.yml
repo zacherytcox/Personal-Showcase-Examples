@@ -6,6 +6,7 @@ on:
     branches: [ "main" ]
     paths:
       - 'kubernetes/**'
+      - '.github/workflows/kubernetes.yml'
   pull_request:
 
 env:
@@ -54,7 +55,7 @@ jobs:
       run: echo ${{ steps.vpc_info.outputs.vpc_info }}
 
     - name: tfvars input
-      run: echo 'vpc_id = ${{ steps.vpc_info.outputs.vpc_info }}' > pipeline.auto.tfvars
+      run: echo 'vpc_id = ${{ steps.vpc_info.outputs.vpc_info }}' > stage.auto.tfvars
 
 
 

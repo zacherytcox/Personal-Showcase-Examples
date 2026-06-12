@@ -6,7 +6,7 @@ output "name" {
   value = "testt"
 }
 
-output "name" {
+output "vpc_id" {
   value = vars.vpc_id
 }
 

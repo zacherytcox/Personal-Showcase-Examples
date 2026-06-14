@@ -68,24 +68,24 @@ jobs:
 
     ## Gather information about existing resources
 
-    - name: create tfvars file
-      run: touch pipeline.auto.tfvars
+    # - name: create tfvars file
+    #   run: touch pipeline.auto.tfvars
 
-    - name: Get VPC Info
-      run: vpc_info=$(aws ec2 describe-vpcs| jq -r '.'); echo $vpc_info
+    # - name: Get VPC Info
+    #   run: vpc_info=$(aws ec2 describe-vpcs| jq -r '.'); echo $vpc_info
 
-    - name: Get VPC Info
-      id: vpc_info
-      run: echo "vpc_info=$(aws ec2 describe-vpcs| jq -r '.Vpcs.[0].VpcId')" >> "$GITHUB_OUTPUT"
+    # - name: Get VPC Info
+    #   id: vpc_info
+    #   run: echo "vpc_info=$(aws ec2 describe-vpcs| jq -r '.Vpcs.[0].VpcId')" >> "$GITHUB_OUTPUT"
 
-    - name: debug
-      run: echo ${{ steps.vpc_info.outputs.vpc_info }}
+    # - name: debug
+    #   run: echo ${{ steps.vpc_info.outputs.vpc_info }}
 
-    - name: tfvars input
-      run: echo 'vpc_id = ${{ steps.vpc_info.outputs.vpc_info }}' >> pipeline.auto.tfvars
+    # - name: tfvars input
+    #   run: echo 'vpc_id = ${{ steps.vpc_info.outputs.vpc_info }}' >> pipeline.auto.tfvars
 
-    - name: debug
-      run: cat pipeline.auto.tfvars; ls -alh
+    # - name: debug
+    #   run: cat pipeline.auto.tfvars; ls -alh
 
 
 

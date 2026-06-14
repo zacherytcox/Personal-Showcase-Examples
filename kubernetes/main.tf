@@ -26,27 +26,27 @@ output "output_subnets" {
 }
 
 
-# resource "aws_eks_cluster" "example" {
-#   name = "example"
+resource "aws_eks_cluster" "example" {
+  name = "example"
 
-#   access_config {
-#     authentication_mode = "API"
-#   }
+  access_config {
+    authentication_mode = "API"
+  }
 
-#   role_arn = aws_iam_role.cluster.arn
-#   version  = "1.35"
+  role_arn = aws_iam_role.cluster.arn
+  version  = "1.35"
 
-#   vpc_config {
-#     subnet_ids = data.aws_subnets.default_vpc_subnets.ids
-#   }
+  vpc_config {
+    subnet_ids = data.aws_subnets.default_vpc_subnets.ids
+  }
 
-#   # Ensure that IAM Role permissions are created before and deleted
-#   # after EKS Cluster handling. Otherwise, EKS will not be able to
-#   # properly delete EKS managed EC2 infrastructure such as Security Groups.
-#   depends_on = [
-#     aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy,
-#   ]
-# }
+  # Ensure that IAM Role permissions are created before and deleted
+  # after EKS Cluster handling. Otherwise, EKS will not be able to
+  # properly delete EKS managed EC2 infrastructure such as Security Groups.
+  depends_on = [
+    aws_iam_role_policy_attachment.cluster_AmazonEKSClusterPolicy,
+  ]
+}
 
 resource "aws_iam_role" "cluster" {
   name = "eks-cluster-example"

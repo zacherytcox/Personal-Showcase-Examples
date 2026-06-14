@@ -1,8 +1,7 @@
 provider "aws" {
   region = "us-east-1"
-  
-}
 
+}
 
 data "aws_caller_identity" "current" {}
 
@@ -10,7 +9,7 @@ data "aws_region" "current" {}
 
 terraform {
   backend "s3" {
-    bucket       = "terraform-state-bucket-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.name}-an"
+    bucket       = "terraform-state-bucket-${data.aws_caller_identity.current.account_id}-${data.aws_region.current.region}-an"
     use_lockfile = true
     region       = "us-east-1"
   }

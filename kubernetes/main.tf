@@ -6,8 +6,12 @@ output "name" {
   value = "testt"
 }
 
+data "aws_vpc" "default_vpc" {
+  default = true
+}
+
 output "output_vpc_id" {
-  value = var.vpc_id
+  value = aws_vpc.default_vpc.id
 }
 
 

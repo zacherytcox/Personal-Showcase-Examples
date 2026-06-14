@@ -22,7 +22,7 @@ data "aws_subnets" "default_vpc_subnets" {
 }
 
 output "output_subnets" {
-  value = data.aws_subnets.default_vpc_subnets
+  value = data.aws_subnets.default_vpc_subnets.ids
 }
 
 
@@ -37,11 +37,7 @@ output "output_subnets" {
 #   version  = "1.35"
 
 #   vpc_config {
-#     subnet_ids = [
-#       aws_subnet.az1.id,
-#       aws_subnet.az2.id,
-#       aws_subnet.az3.id,
-#     ]
+#     subnet_ids = data.aws_subnets.default_vpc_subnets.ids
 #   }
 
 #   # Ensure that IAM Role permissions are created before and deleted

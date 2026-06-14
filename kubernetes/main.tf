@@ -7,7 +7,7 @@ provider "aws" {
 terraform {
   backend "s3" {
     bucket       = "terraform-state-bucket-pluralsite-treehouse"
-    path         = "state"
+    key         = "state"
     use_lockfile = true
     region       = "us-east-1"
   }

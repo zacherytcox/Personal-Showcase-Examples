@@ -6,6 +6,7 @@ on:
     branches: [ "main" ]
     paths:
       - 'terraform/**'
+      - '!terraform/state_bucket/**'
       - '.github/workflows/terraform.yml'
   pull_request:
 

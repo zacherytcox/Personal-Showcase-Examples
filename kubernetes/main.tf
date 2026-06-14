@@ -21,7 +21,7 @@ data "aws_subnets" "default_vpc_subnets" {
   }
 }
 
-output "output_vpc_id" {
+output "output_subnets" {
   value = data.aws_subnets.default_vpc_subnets
 }
 
